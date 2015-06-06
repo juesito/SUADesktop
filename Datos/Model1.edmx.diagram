@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6471ba70cc9548f6b787eb31296ded08" Name="Diagram1">
+        <EntityTypeShape EntityType="suaModel.Acreditados" Width="1.5" PointX="5.25" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Asegurados" Width="1.5" PointX="8.25" PointY="36.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.catalogoMovimientos" Width="1.5" PointX="13.5" PointY="36.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Clientes" Width="1.5" PointX="5.25" PointY="31.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Factores" Width="1.5" PointX="5.25" PointY="24" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Funcions" Width="1.5" PointX="6" PointY="15.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Grupos" Width="1.5" PointX="3" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Incapacidades" Width="1.5" PointX="10.5" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Modulos" Width="1.5" PointX="6" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Movimientos" Width="1.5" PointX="13.5" PointY="39.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.MovimientosAseguradoes" Width="1.5" PointX="15.75" PointY="39.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Parametros" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Patrones" Width="1.5" PointX="3" PointY="49.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Plazas" Width="1.5" PointX="0.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.RoleFuncions" Width="1.5" PointX="8.25" PointY="26.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.RoleModulos" Width="1.5" PointX="8.25" PointY="22.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Roles" Width="1.5" PointX="0.75" PointY="22.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.TopicosUsuarios" Width="1.5" PointX="5.25" PointY="47" IsExpanded="true" />
+        <EntityTypeShape EntityType="suaModel.Usuarios" Width="1.5" PointX="3" PointY="25.25" IsExpanded="true" />
+        <AssociationConnector Association="suaModel.FK_Acreditados_Acreditados" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Acreditados_Clientes" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Movimientos_Acreditados" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PatroneAcreditado" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PlazaAcreditado" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Asegurados_Clientes" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Incapacidades_Asegurados" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Movimientos_Asegurados" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_MovimientosAsegurado_Asegurados" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PatroneAsegurado" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PlazaAsegurado" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_MovimientosAsegurado_catalogoMovimientos" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_GrupoClientes" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PlazaClientes" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Factores_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Funciones_Modulos" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_RoleFunciones_Funciones" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PlazaGrupos" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_MovimientosAsegurado_Incapacidades" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_RoleModulos_Modulos" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_PlazaPatrone" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Usuarios_Plazas" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_RoleFunciones_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_RoleFunciones_RoleUsuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_RoleModulos_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_RoleModulos_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_Usuarios_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_TopicosUsuario_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="suaModel.FK_TopicosUsuario_Usuario2" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
