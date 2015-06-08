@@ -64,7 +64,7 @@ namespace Datos
             this.cerrarConexion();
 
             string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;" +
-                                          "Data Source=" + path.Trim() + "\\sua.mdb;Jet OLEDB:Database Password=S5@N52V49;";
+                                          "Data Source=" + path.Trim() + ";Jet OLEDB:Database Password=S5@N52V49;";
             this.connection = new OleDbConnection(connectionString);
             this.connection.Open();
 
