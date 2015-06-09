@@ -29,6 +29,13 @@ namespace ConsoleApplication1
                         cargarSua.uploadAsegurado(path);
                         try
                         {
+                            String path2 = path + "\\BACKUP\\";
+                            if (!System.IO.File.Exists(path2))
+                            {
+                                System.IO.Directory.CreateDirectory(path2);
+                            }
+                            DateTime date = DateTime.Now;
+                            File.Move(path, Path.Combine(path2, "SUA" + date.ToString("ddMMyyyyHHmm") + ".mdb"));
                             System.IO.File.Delete(path);
                         }
                         catch (System.IO.IOException e)
@@ -54,7 +61,14 @@ namespace ConsoleApplication1
                                 cargarSua.uploadAsegurado(subPath);
                                 try
                                 {
-                                    System.IO.File.Delete(path);
+                                    String path2 = path + "\\BACKUP\\";
+                                    if (!System.IO.File.Exists(path2))
+                                    {
+                                        System.IO.Directory.CreateDirectory(path2);
+                                    }
+                                    DateTime date = DateTime.Now;
+                                    File.Move(subPath, Path.Combine(path2, "SUA" + date.ToString("ddMMyyyyHHmm") + ".mdb"));
+                                    System.IO.File.Delete(subPath);
                                 }
                                 catch (System.IO.IOException e)
                                 {

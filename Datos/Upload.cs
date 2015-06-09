@@ -106,30 +106,33 @@ namespace Datos
                             }//Ya existen datos con esta plaza?                            
 
                             //Modificamos los datos del patron existente
-                            patron.registro = rows["REG_PAT"].ToString();
-                            patron.rfc = rows["RFC_PAT"].ToString();
-                            patron.nombre = rows["NOM_PAT"].ToString();
-                            patron.actividad = rows["ACT_PAT"].ToString();
-                            patron.domicilio = rows["DOM_PAT"].ToString();
-                            patron.municipio = rows["MUN_PAT"].ToString();
-                            patron.codigoPostal = rows["CPP_PAT"].ToString();
-                            patron.entidad = rows["ENT_PAT"].ToString();
                             patron.telefono = rows["TEL_PAT"].ToString();
-                            patron.remision = ((Boolean.Parse(rows["REM_PAT"].ToString()) == true) ? "V" : "F");
-                            patron.zona = rows["ZON_PAT"].ToString();
-                            patron.delegacion = rows["DEL_PAT"].ToString();
-                            patron.carEnt = rows["CAR_ENT"].ToString();
-                            patron.numeroDelegacion = Int32.Parse(rows["NUM_DEL"].ToString());
-                            patron.carDel = rows["CAR_DEL"].ToString();
-                            patron.numSub = Int32.Parse(rows["NUM_SUB"].ToString());
-                            patron.Plaza_id = plaza.id;
-                            patron.tipoConvenio = Decimal.Parse(rows["TIP_CON"].ToString());
-                            patron.convenio = rows["CON_VEN"].ToString();
-                            patron.inicioAfiliacion = rows["INI_AFIL"].ToString();
+                            patron.domicilio = rows["DOM_PAT"].ToString();
                             patron.patRep = rows["PAT_REP"].ToString();
-                            patron.clase = rows["CLASE"].ToString();
-                            patron.fraccion = rows["FRACCION"].ToString();
-                            patron.STyPS = rows["STyPS"].ToString();
+                            /*                          patron.registro = rows["REG_PAT"].ToString();
+                                                        patron.rfc = rows["RFC_PAT"].ToString();
+                                                        patron.nombre = rows["NOM_PAT"].ToString();
+                                                        patron.actividad = rows["ACT_PAT"].ToString();
+                                                        patron.domicilio = rows["DOM_PAT"].ToString();
+                                                        patron.municipio = rows["MUN_PAT"].ToString();
+                                                        patron.codigoPostal = rows["CPP_PAT"].ToString();
+                                                        patron.entidad = rows["ENT_PAT"].ToString();
+                                                        patron.telefono = rows["TEL_PAT"].ToString();
+                                                        patron.remision = ((Boolean.Parse(rows["REM_PAT"].ToString()) == true) ? "V" : "F");
+                                                        patron.zona = rows["ZON_PAT"].ToString();
+                                                        patron.delegacion = rows["DEL_PAT"].ToString();
+                                                        patron.carEnt = rows["CAR_ENT"].ToString();
+                                                        patron.numeroDelegacion = Int32.Parse(rows["NUM_DEL"].ToString());
+                                                        patron.carDel = rows["CAR_DEL"].ToString();
+                                                        patron.numSub = Int32.Parse(rows["NUM_SUB"].ToString());
+                                                        patron.Plaza_id = plaza.id;
+                                                        patron.tipoConvenio = Decimal.Parse(rows["TIP_CON"].ToString());
+                                                        patron.convenio = rows["CON_VEN"].ToString();
+                                                        patron.inicioAfiliacion = rows["INI_AFIL"].ToString();
+                                                        patron.patRep = rows["PAT_REP"].ToString();
+                                                        patron.clase = rows["CLASE"].ToString();
+                                                        patron.fraccion = rows["FRACCION"].ToString();
+                                                        patron.STyPS = rows["STyPS"].ToString();                  */
 
                             //Ponemos la entidad en modo modficada y guardamos cambios
                             try
@@ -550,30 +553,30 @@ namespace Datos
 
             Decimal newValue = Decimal.Parse("0.0");
             //Empezamos con los calculos
-            if (tipoDescuento.Trim().Equals("1"))
-            {
+            /*            if (tipoDescuento.Trim().Equals("1"))
+                        {
 
-                // Descuento tipo porcentaje
-                acreditado.sd = 0;
-                acreditado.cuotaFija = 0;
-                //                acreditado.smdv = 0.0;
-                acreditado.vsm = 0;
-                acreditado.porcentaje = valueToCalculate / 100;
+                            // Descuento tipo porcentaje
+                            acreditado.sd = 0;
+                            acreditado.cuotaFija = 0;
+                            //                acreditado.smdv = 0.0;
+                            acreditado.vsm = 0;
+                            acreditado.porcentaje = valueToCalculate / 100;
 
 
-                newValue = (sdi * 60);
-                newValue = newValue * (valueToCalculate / 100);
-                newValue = newValue + sinfon;
+                            newValue = (sdi * 60);
+                            newValue = newValue * (valueToCalculate / 100);
+                            newValue = newValue + sinfon;
 
-                acreditado.descuentoBimestral = newValue;
+                            acreditado.descuentoBimestral = newValue;
 
-            }
-            else if (tipoDescuento.Trim().Equals("2"))
+                        }
+                        else */
+            if (tipoDescuento.Trim().Equals("2"))
             {
                 // Descuento tipo cuota fija
                 acreditado.sd = 0;
                 acreditado.cuotaFija = valueToCalculate;
-                //               acreditado.smdv = 0.0;
                 acreditado.vsm = 0;
                 acreditado.porcentaje = 0;
 
@@ -587,7 +590,6 @@ namespace Datos
                 // Descuento tipo VSM
                 acreditado.sd = 0;
                 acreditado.cuotaFija = 0;
-                //               acreditado.smdv = 0.0;
                 acreditado.vsm = Math.Round(valueToCalculate, 3);
                 acreditado.porcentaje = 0;
                 newValue = valueToCalculate * smdf * 2;
@@ -1121,7 +1123,7 @@ namespace Datos
             var movTemp = (from s in db.MovimientosAseguradoes
                                   .Where(s => s.aseguradoId.Equals(aseguradoId)
                                    && s.catalogoMovimientos.tipo.Equals("08"))
-                                  .OrderBy(s => s.fechaInicio)
+                                  .OrderByDescending(s => s.fechaInicio)
                            select s).FirstOrDefault();
 
             if (movTemp != null)
@@ -1129,24 +1131,35 @@ namespace Datos
                 asegurado.fechaAlta = movTemp.fechaInicio;
             }
 
-            //obtenemos el ultimo movimiento para saber como se calcula
-            //el salario Diario.
-            movTemp = (from s in db.MovimientosAseguradoes
-                                  .Where(s => s.aseguradoId.Equals(aseguradoId))
-                                  .OrderBy(s => s.fechaInicio)
-                       select s).FirstOrDefault();
-
-            if (movTemp != null)
+            if (asegurado.salarioDiario == null)
             {
-                if (asegurado.salarioDiario == null)
+                asegurado.salarioDiario = 0;
+            }
+
+            var movTemp2 = (from s in db.MovimientosAseguradoes
+                            where s.aseguradoId.Equals(aseguradoId) &&
+                                 (s.catalogoMovimientos.tipo.Equals("01") || s.catalogoMovimientos.tipo.Equals("02") ||
+                                  s.catalogoMovimientos.tipo.Equals("07") || s.catalogoMovimientos.tipo.Equals("08") ||
+                                  s.catalogoMovimientos.tipo.Equals("13"))
+                            orderby s.fechaInicio descending
+                            select s).ToList();
+
+            MovimientosAseguradoes movto = new MovimientosAseguradoes();
+            if (movTemp2 != null && movTemp2.Count() > 0)
+            {
+                foreach (var movItem in movTemp2)
                 {
-                    asegurado.salarioDiario = 0;
+                    movto = movItem;
+                    break;
                 }
-                if (movTemp.catalogoMovimientos.tipo.Trim().Equals("08"))
+
+                if (movto.catalogoMovimientos.tipo.Trim().Equals("08"))
                 {
                     asegurado.salarioDiario = Decimal.Parse(movTemp.sdi.Trim());
+                    asegurado.salarioImss = Decimal.Parse(movto.sdi.ToString());
                 }
-                else if (movTemp.catalogoMovimientos.tipo.Trim().Equals("01") || movTemp.catalogoMovimientos.tipo.Trim().Equals("07"))
+                else if (movto.catalogoMovimientos.tipo.Trim().Equals("01") || movto.catalogoMovimientos.tipo.Trim().Equals("07") ||
+                         movto.catalogoMovimientos.tipo.Trim().Equals("13"))
                 {
                     long annos = DatesHelper.DateDiffInYears(asegurado.fechaAlta, ahora);
                     if (annos.Equals(0))
@@ -1156,37 +1169,114 @@ namespace Datos
                     Factores factor = (db.Factores.Where(x => x.anosTrabajados == annos).FirstOrDefault());
                     if (factor != null)
                     {
-                        asegurado.salarioDiario = Decimal.Parse(movTemp.sdi.Trim()) / factor.factorIntegracion;
+                        asegurado.salarioDiario = Decimal.Parse(movto.sdi.Trim()) / factor.factorIntegracion;
+                        asegurado.salarioImss = Decimal.Parse(movto.sdi.ToString());
                     }
                     else
                     {
                         asegurado.salarioDiario = 0;
                     }
                 }
-                else if (movTemp.catalogoMovimientos.tipo.Trim().Equals("02"))
+                else if (movto.catalogoMovimientos.tipo.Trim().Equals("02"))
                 {
                     asegurado.salarioDiario = 0;
+                    asegurado.salarioImss = 0;
 
                 }
 
-                db.Entry(asegurado).State = EntityState.Modified;
-                db.SaveChanges();
-
-                Acreditados acreditado = (from s in db.Acreditados
-                                          where s.PatroneId == asegurado.PatroneId
-                                             && s.numeroAfiliacion.Equals(asegurado.numeroAfiliacion)
-                                          select s).FirstOrDefault();
-
-                if (acreditado != null)
+            }
+            else
+            {
+                long annos = DatesHelper.DateDiffInYears(asegurado.fechaAlta, ahora);
+                if (annos.Equals(0))
                 {
-                    acreditado.fechaAlta = asegurado.fechaAlta;
-                    acreditado.sd = Decimal.Parse(asegurado.salarioDiario.ToString());
-
-                    db.Entry(acreditado).State = EntityState.Modified;
-                    db.SaveChanges();
+                    annos = 1;
+                }
+                Factores factor = (db.Factores.Where(x => x.anosTrabajados == annos).FirstOrDefault());
+                if (factor != null)
+                {
+                    asegurado.salarioDiario = asegurado.salarioImss / factor.factorIntegracion;
+                }
+                else
+                {
+                    asegurado.salarioDiario = 0;
                 }
             }
 
+            if (asegurado.fechaBaja.HasValue)
+            {
+                asegurado.salarioDiario = 0;
+                asegurado.salarioImss = 0;
+            }
+
+            db.Entry(asegurado).State = EntityState.Modified;
+            db.SaveChanges();
+
+            Acreditados acreditado = (from s in db.Acreditados
+                                      where s.PatroneId == asegurado.PatroneId
+                                         && s.numeroAfiliacion.Equals(asegurado.numeroAfiliacion)
+                                      select s).FirstOrDefault();
+
+            if (acreditado != null)
+            {
+                acreditado.fechaAlta = asegurado.fechaAlta;
+                acreditado.sd = Decimal.Parse(asegurado.salarioDiario.ToString());
+                acreditado.sdi = Double.Parse(asegurado.salarioImss.ToString());
+
+                //calcular el descuento tipo uno que ocupa sdi
+                DateTime date = DateTime.Now;
+                Decimal valueToCalculate = Decimal.Parse(asegurado.valorDescuento.ToString());
+                Decimal newValue = Decimal.Parse("0.0");
+
+
+                if (asegurado.tipoDescuento.Trim().Equals("1"))
+                {
+
+                    try
+                    {
+                        ParametrosHelper parameterHelper = new ParametrosHelper();
+
+                        Parametros sinfonParameter = parameterHelper.getParameterByKey("SINFON");
+
+                        decimal sinfon = decimal.Parse(sinfonParameter.valorMoneda.ToString());
+                        // Descuento tipo porcentaje
+                        acreditado.cuotaFija = 0;
+                        acreditado.vsm = 0;
+                        acreditado.porcentaje = valueToCalculate / 100;
+
+
+                        newValue = (Decimal.Parse(acreditado.sdi.ToString()) * 60);
+                        newValue = newValue * (valueToCalculate / 100);
+                        newValue = newValue + sinfon;
+
+                        acreditado.descuentoBimestral = newValue;
+
+                        acreditado.descuentoMensual = Math.Round(acreditado.descuentoBimestral / 2, 3);
+                        Decimal newValue2 = acreditado.descuentoMensual * Decimal.Parse((7 / 30.4).ToString());
+                        newValue2 = Math.Round(newValue2, 3);
+                        acreditado.descuentoSemanal = newValue2;
+
+                        newValue2 = acreditado.descuentoMensual * Decimal.Parse((14 / 30.4).ToString());
+                        newValue2 = Math.Round(newValue2, 3);
+                        acreditado.descuentoCatorcenal = newValue2;
+                        acreditado.descuentoQuincenal = Math.Round(acreditado.descuentoBimestral / 4, 3);
+                        acreditado.descuentoVeintiochonal = Math.Round(acreditado.descuentoMensual * Decimal.Parse((28 / 30.4).ToString()), 3);
+                        acreditado.descuentoDiario = Math.Round(acreditado.descuentoBimestral / Decimal.Parse("60.1"), 3);
+                        acreditado.fechaUltimoCalculo = date.Date;
+                    }
+                    catch (OleDbException ex)
+                    {
+                        if (ex.Source != null)
+                        {
+                            Console.WriteLine(ex.Source);
+                        }
+                    }
+                }
+
+                db.Entry(acreditado).State = EntityState.Modified;
+                db.SaveChanges();
+            }
         }
+
     }
 }
